@@ -22,125 +22,166 @@
         }
 
         .digimon-device {
-            width: 320px;
-            height: 480px;
+            width: 480px;
+            height: 680px;
             background: linear-gradient(45deg, #2c3e50, #34495e);
-            border-radius: 20px;
-            border: 8px solid #7f8c8d;
+            border-radius: 25px;
+            border: 10px solid #7f8c8d;
             box-shadow: 
-                0 0 20px rgba(0, 0, 0, 0.5),
-                inset 0 0 10px rgba(255, 255, 255, 0.1);
+                0 0 30px rgba(0, 0, 0, 0.6),
+                inset 0 0 15px rgba(255, 255, 255, 0.1);
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 20px;
+            padding: 30px;
             position: relative;
         }
 
         .screen {
-            width: 250px;
-            height: 180px;
+            width: 360px;
+            height: 240px;
             background: #2d5016;
-            border: 4px solid #000;
-            border-radius: 8px;
+            border: 6px solid #000;
+            border-radius: 12px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             position: relative;
-            margin-bottom: 20px;
-            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.8);
+            margin-bottom: 30px;
+            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.8);
         }
 
         .screen-content {
             color: #9fff9f;
             text-align: center;
-            font-size: 12px;
+            font-size: 16px;
             font-weight: bold;
-            text-shadow: 0 0 5px #9fff9f;
+            text-shadow: 0 0 8px #9fff9f;
         }
 
         .digimon-display {
-            font-size: 48px;
-            margin: 10px 0;
+            font-size: 64px;
+            margin: 15px 0;
             animation: float 2s ease-in-out infinite;
         }
 
         .digimon-name {
-            font-size: 14px;
-            margin-bottom: 5px;
+            font-size: 18px;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
         }
 
         .stats {
-            font-size: 10px;
-            line-height: 1.2;
+            font-size: 13px;
+            line-height: 1.4;
         }
 
         .stats-bar {
-            width: 80px;
-            height: 6px;
+            width: 120px;
+            height: 10px;
             background: #1a3d0a;
-            border: 1px solid #9fff9f;
-            margin: 2px 0;
+            border: 2px solid #9fff9f;
+            margin: 4px 0;
             position: relative;
+            border-radius: 5px;
         }
 
         .stats-fill {
             height: 100%;
-            background: #9fff9f;
+            background: linear-gradient(90deg, #9fff9f, #7fff7f);
             transition: width 0.3s ease;
+            border-radius: 3px;
+            box-shadow: 0 0 5px rgba(159, 255, 159, 0.5);
         }
 
         .controls {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            margin-top: 20px;
+            gap: 25px;
+            margin-top: 30px;
+            width: 100%;
+            max-width: 400px;
         }
 
         .button {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            border: 3px solid #34495e;
-            background: linear-gradient(45deg, #95a5a6, #bdc3c7);
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            border: 4px solid #34495e;
+            background: linear-gradient(135deg, #3498db, #2980b9);
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 12px;
+            font-size: 14px;
             font-weight: bold;
-            color: #2c3e50;
-            transition: all 0.2s ease;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            color: #ffffff;
+            transition: all 0.3s ease;
+            box-shadow: 
+                0 6px 12px rgba(0, 0, 0, 0.4),
+                inset 0 2px 4px rgba(255, 255, 255, 0.2);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+            letter-spacing: 0.5px;
+            user-select: none;
+            position: relative;
+            overflow: hidden;
         }
 
         .button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 
+                0 8px 16px rgba(0, 0, 0, 0.5),
+                inset 0 2px 4px rgba(255, 255, 255, 0.3);
+            background: linear-gradient(135deg, #5dade2, #3498db);
         }
 
         .button:active {
-            transform: translateY(0);
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            transform: translateY(-1px) scale(1.02);
+            box-shadow: 
+                0 4px 8px rgba(0, 0, 0, 0.4),
+                inset 0 2px 4px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(135deg, #2980b9, #1f4e79);
+        }
+
+        .button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s;
+        }
+
+        .button:active::before {
+            width: 100%;
+            height: 100%;
         }
 
         .brand {
             position: absolute;
-            top: 5px;
+            top: 8px;
             left: 50%;
             transform: translateX(-50%);
-            color: #bdc3c7;
-            font-size: 10px;
+            color: #ecf0f1;
+            font-size: 14px;
             font-weight: bold;
+            letter-spacing: 2px;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
         }
 
         .time-display {
             position: absolute;
-            bottom: 10px;
-            right: 15px;
-            color: #95a5a6;
-            font-size: 10px;
+            bottom: 15px;
+            right: 20px;
+            color: #bdc3c7;
+            font-size: 14px;
+            font-weight: bold;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
         }
 
         @keyframes float {
@@ -163,21 +204,67 @@
 
         .status-indicator {
             position: absolute;
-            top: 10px;
-            right: 10px;
-            width: 8px;
-            height: 8px;
+            top: 15px;
+            right: 15px;
+            width: 12px;
+            height: 12px;
             border-radius: 50%;
             background: #27ae60;
             animation: blink 2s infinite;
+            box-shadow: 0 0 10px rgba(39, 174, 96, 0.6);
         }
 
         .menu-text {
             position: absolute;
-            bottom: 10px;
-            left: 10px;
-            font-size: 8px;
+            bottom: 15px;
+            left: 15px;
+            font-size: 12px;
             color: #9fff9f;
+            font-weight: bold;
+            text-shadow: 0 0 5px #9fff9f;
+        }
+
+        /* レスポンシブ対応 */
+        @media (max-width: 600px) {
+            .digimon-device {
+                width: 90vw;
+                max-width: 420px;
+                height: auto;
+                min-height: 600px;
+                padding: 20px;
+            }
+            
+            .screen {
+                width: 85%;
+                height: 200px;
+            }
+            
+            .button {
+                width: 70px;
+                height: 70px;
+                font-size: 12px;
+            }
+            
+            .controls {
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .digimon-device {
+                padding: 15px;
+                border: 6px solid #7f8c8d;
+            }
+            
+            .button {
+                width: 60px;
+                height: 60px;
+                font-size: 11px;
+            }
+            
+            .controls {
+                gap: 10px;
+            }
         }
     </style>
 </head>
@@ -299,10 +386,14 @@
             showMessage(message) {
                 const nameElement = document.getElementById('digimonName');
                 const originalText = nameElement.textContent;
+                nameElement.style.color = '#ffffff';
+                nameElement.style.textShadow = '0 0 10px #ffffff';
                 nameElement.textContent = message;
                 setTimeout(() => {
+                    nameElement.style.color = '#9fff9f';
+                    nameElement.style.textShadow = '0 0 8px #9fff9f';
                     nameElement.textContent = originalText;
-                }, 2000);
+                }, 2500);
             }
 
             updateDisplay() {
@@ -370,28 +461,61 @@
         // グローバル関数
         let digimon;
 
+        function addButtonFeedback(buttonElement) {
+            buttonElement.style.transform = 'translateY(-1px) scale(1.02)';
+            buttonElement.style.filter = 'brightness(1.2)';
+            setTimeout(() => {
+                buttonElement.style.transform = '';
+                buttonElement.style.filter = '';
+            }, 150);
+        }
+
         function feedDigimon() {
-            digimon.feed();
+            const button = event.target;
+            addButtonFeedback(button);
+            if (digimon) {
+                digimon.feed();
+            }
         }
 
         function playWithDigimon() {
-            digimon.play();
+            const button = event.target;
+            addButtonFeedback(button);
+            if (digimon) {
+                digimon.play();
+            }
         }
 
         function trainDigimon() {
-            digimon.train();
+            const button = event.target;
+            addButtonFeedback(button);
+            if (digimon) {
+                digimon.train();
+            }
         }
 
         function cleanDigimon() {
-            digimon.clean();
+            const button = event.target;
+            addButtonFeedback(button);
+            if (digimon) {
+                digimon.clean();
+            }
         }
 
         function healDigimon() {
-            digimon.heal();
+            const button = event.target;
+            addButtonFeedback(button);
+            if (digimon) {
+                digimon.heal();
+            }
         }
 
         function statusDigimon() {
-            digimon.showStatus();
+            const button = event.target;
+            addButtonFeedback(button);
+            if (digimon) {
+                digimon.showStatus();
+            }
         }
 
         // ゲーム開始
