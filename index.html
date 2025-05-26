@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ハローワールド - GitHub Pages</title>
+    <title>デジタルモンスター - バーチャルペット</title>
     <style>
         * {
             margin: 0;
@@ -12,167 +12,392 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            height: 100vh;
+            font-family: 'Courier New', monospace;
+            background: #1a1a1a;
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
+            min-height: 100vh;
+            padding: 20px;
         }
 
-        .container {
-            text-align: center;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+        .digimon-device {
+            width: 320px;
+            height: 480px;
+            background: linear-gradient(45deg, #2c3e50, #34495e);
             border-radius: 20px;
-            padding: 60px 80px;
-            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            animation: fadeInUp 1s ease-out;
+            border: 8px solid #7f8c8d;
+            box-shadow: 
+                0 0 20px rgba(0, 0, 0, 0.5),
+                inset 0 0 10px rgba(255, 255, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            position: relative;
         }
 
-        .hello-world {
-            font-size: 4rem;
-            font-weight: 700;
-            background: linear-gradient(45deg, #ff6b6b, #ffd93d, #6bcf7f, #4d79ff);
-            background-size: 300% 300%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: gradientAnimation 3s ease-in-out infinite;
+        .screen {
+            width: 250px;
+            height: 180px;
+            background: #2d5016;
+            border: 4px solid #000;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
             margin-bottom: 20px;
-            text-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.8);
         }
 
-        .subtitle {
-            font-size: 1.2rem;
-            color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 30px;
-            font-weight: 300;
+        .screen-content {
+            color: #9fff9f;
+            text-align: center;
+            font-size: 12px;
+            font-weight: bold;
+            text-shadow: 0 0 5px #9fff9f;
         }
 
-        .github-link {
-            display: inline-block;
-            padding: 12px 24px;
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            font-weight: 500;
+        .digimon-display {
+            font-size: 48px;
+            margin: 10px 0;
+            animation: float 2s ease-in-out infinite;
         }
 
-        .github-link:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        .digimon-name {
+            font-size: 14px;
+            margin-bottom: 5px;
         }
 
-        .sparkles {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
+        .stats {
+            font-size: 10px;
+            line-height: 1.2;
+        }
+
+        .stats-bar {
+            width: 80px;
+            height: 6px;
+            background: #1a3d0a;
+            border: 1px solid #9fff9f;
+            margin: 2px 0;
+            position: relative;
+        }
+
+        .stats-fill {
             height: 100%;
-            pointer-events: none;
+            background: #9fff9f;
+            transition: width 0.3s ease;
         }
 
-        .sparkle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: white;
+        .controls {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .button {
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
-            opacity: 0;
-            animation: sparkle 3s linear infinite;
+            border: 3px solid #34495e;
+            background: linear-gradient(45deg, #95a5a6, #bdc3c7);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+            color: #2c3e50;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        .button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .brand {
+            position: absolute;
+            top: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #bdc3c7;
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        .time-display {
+            position: absolute;
+            bottom: 10px;
+            right: 15px;
+            color: #95a5a6;
+            font-size: 10px;
+        }
+
+        @keyframes float {
+            0%, 100% {
                 transform: translateY(0);
             }
-        }
-
-        @keyframes gradientAnimation {
-            0%, 100% {
-                background-position: 0% 50%;
-            }
             50% {
-                background-position: 100% 50%;
+                transform: translateY(-5px);
             }
         }
 
-        @keyframes sparkle {
-            0% {
-                opacity: 0;
-                transform: scale(0);
-            }
-            50% {
+        @keyframes blink {
+            0%, 50% {
                 opacity: 1;
-                transform: scale(1);
             }
-            100% {
-                opacity: 0;
-                transform: scale(0);
+            51%, 100% {
+                opacity: 0.3;
             }
         }
 
-        @media (max-width: 768px) {
-            .container {
-                padding: 40px 30px;
-                margin: 20px;
-            }
-            
-            .hello-world {
-                font-size: 2.5rem;
-            }
-            
-            .subtitle {
-                font-size: 1rem;
-            }
+        .status-indicator {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #27ae60;
+            animation: blink 2s infinite;
+        }
+
+        .menu-text {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            font-size: 8px;
+            color: #9fff9f;
         }
     </style>
 </head>
 <body>
-    <div class="sparkles" id="sparkles"></div>
-    
-    <div class="container">
-        <h1 class="hello-world">ハローワールド</h1>
-        <p class="subtitle">GitHub Pages へようこそ！</p>
-        <a href="https://github.com/hirokiriko/TestClaudeCodeActions" class="github-link">
-            View on GitHub
-        </a>
+    <div class="digimon-device">
+        <div class="brand">DIGITAL MONSTER</div>
+        
+        <div class="screen">
+            <div class="status-indicator"></div>
+            <div class="menu-text" id="menuText">AGUMON</div>
+            
+            <div class="screen-content">
+                <div class="digimon-name" id="digimonName">アグモン</div>
+                <div class="digimon-display" id="digimonSprite">🦕</div>
+                
+                <div class="stats">
+                    <div>ハングリー</div>
+                    <div class="stats-bar">
+                        <div class="stats-fill" id="hungerBar" style="width: 70%;"></div>
+                    </div>
+                    
+                    <div>ハート</div>
+                    <div class="stats-bar">
+                        <div class="stats-fill" id="happinessBar" style="width: 80%;"></div>
+                    </div>
+                    
+                    <div>つよさ</div>
+                    <div class="stats-bar">
+                        <div class="stats-fill" id="strengthBar" style="width: 60%;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <div class="button" onclick="feedDigimon()">エサ</div>
+            <div class="button" onclick="playWithDigimon()">アソブ</div>
+            <div class="button" onclick="trainDigimon()">キタエル</div>
+            <div class="button" onclick="cleanDigimon()">ウンチ</div>
+            <div class="button" onclick="healDigimon()">クスリ</div>
+            <div class="button" onclick="statusDigimon()">ステータス</div>
+        </div>
+
+        <div class="time-display" id="timeDisplay">12:00</div>
     </div>
 
     <script>
-        // Create sparkle effect
-        function createSparkle() {
-            const sparkle = document.createElement('div');
-            sparkle.className = 'sparkle';
-            sparkle.style.left = Math.random() * 100 + '%';
-            sparkle.style.top = Math.random() * 100 + '%';
-            sparkle.style.animationDelay = Math.random() * 3 + 's';
-            document.getElementById('sparkles').appendChild(sparkle);
+        class Digimon {
+            constructor() {
+                this.name = 'アグモン';
+                this.sprite = '🦕';
+                this.hunger = 70;
+                this.happiness = 80;
+                this.strength = 60;
+                this.age = 0;
+                this.sick = false;
+                this.poop = false;
+                
+                this.startLifeCycle();
+                this.updateDisplay();
+                this.updateTime();
+            }
 
-            setTimeout(() => {
-                sparkle.remove();
-            }, 3000);
+            feed() {
+                if (this.hunger < 100) {
+                    this.hunger = Math.min(100, this.hunger + 20);
+                    this.showMessage('おいしい！');
+                    this.updateDisplay();
+                }
+            }
+
+            play() {
+                if (this.happiness < 100) {
+                    this.happiness = Math.min(100, this.happiness + 15);
+                    this.hunger = Math.max(0, this.hunger - 5);
+                    this.showMessage('たのしい！');
+                    this.updateDisplay();
+                }
+            }
+
+            train() {
+                if (this.strength < 100) {
+                    this.strength = Math.min(100, this.strength + 10);
+                    this.hunger = Math.max(0, this.hunger - 10);
+                    this.happiness = Math.max(0, this.happiness - 5);
+                    this.showMessage('つよくなった！');
+                    this.updateDisplay();
+                }
+            }
+
+            clean() {
+                if (this.poop) {
+                    this.poop = false;
+                    this.happiness = Math.min(100, this.happiness + 10);
+                    this.showMessage('きれいになった！');
+                    this.updateDisplay();
+                }
+            }
+
+            heal() {
+                if (this.sick) {
+                    this.sick = false;
+                    this.showMessage('げんきになった！');
+                    this.updateDisplay();
+                }
+            }
+
+            showStatus() {
+                const statusText = `
+名前: ${this.name}
+年齢: ${this.age}日
+ハングリー: ${this.hunger}%
+ハート: ${this.happiness}%
+つよさ: ${this.strength}%
+`;
+                this.showMessage(statusText);
+            }
+
+            showMessage(message) {
+                const nameElement = document.getElementById('digimonName');
+                const originalText = nameElement.textContent;
+                nameElement.textContent = message;
+                setTimeout(() => {
+                    nameElement.textContent = originalText;
+                }, 2000);
+            }
+
+            updateDisplay() {
+                document.getElementById('hungerBar').style.width = this.hunger + '%';
+                document.getElementById('happinessBar').style.width = this.happiness + '%';
+                document.getElementById('strengthBar').style.width = this.strength + '%';
+                
+                // デジモンの状態に応じてスプライトを変更
+                let sprite = this.sprite;
+                if (this.sick) sprite = '😵';
+                else if (this.poop) sprite = '💩';
+                else if (this.hunger < 30) sprite = '😴';
+                else if (this.happiness > 80) sprite = '😊🦕';
+                
+                document.getElementById('digimonSprite').textContent = sprite;
+            }
+
+            startLifeCycle() {
+                // ハンガーの減少
+                setInterval(() => {
+                    this.hunger = Math.max(0, this.hunger - 1);
+                    if (this.hunger < 20) {
+                        this.happiness = Math.max(0, this.happiness - 2);
+                    }
+                    this.updateDisplay();
+                }, 30000); // 30秒ごと
+
+                // 幸福度の自然減少
+                setInterval(() => {
+                    this.happiness = Math.max(0, this.happiness - 1);
+                    this.updateDisplay();
+                }, 45000); // 45秒ごと
+
+                // ランダムイベント
+                setInterval(() => {
+                    const random = Math.random();
+                    if (random < 0.1 && !this.poop) {
+                        this.poop = true;
+                        this.happiness = Math.max(0, this.happiness - 10);
+                        this.showMessage('うんち した！');
+                        this.updateDisplay();
+                    } else if (random < 0.05 && !this.sick) {
+                        this.sick = true;
+                        this.showMessage('びょうき！');
+                        this.updateDisplay();
+                    }
+                }, 60000); // 1分ごと
+
+                // 年齢の増加
+                setInterval(() => {
+                    this.age++;
+                }, 86400000); // 24時間ごと
+            }
+
+            updateTime() {
+                setInterval(() => {
+                    const now = new Date();
+                    const timeString = now.getHours().toString().padStart(2, '0') + ':' + 
+                                     now.getMinutes().toString().padStart(2, '0');
+                    document.getElementById('timeDisplay').textContent = timeString;
+                }, 1000);
+            }
         }
 
-        // Generate sparkles periodically
-        setInterval(createSparkle, 300);
+        // グローバル関数
+        let digimon;
 
-        // Create initial sparkles
-        for (let i = 0; i < 50; i++) {
-            setTimeout(createSparkle, i * 100);
+        function feedDigimon() {
+            digimon.feed();
         }
+
+        function playWithDigimon() {
+            digimon.play();
+        }
+
+        function trainDigimon() {
+            digimon.train();
+        }
+
+        function cleanDigimon() {
+            digimon.clean();
+        }
+
+        function healDigimon() {
+            digimon.heal();
+        }
+
+        function statusDigimon() {
+            digimon.showStatus();
+        }
+
+        // ゲーム開始
+        window.onload = function() {
+            digimon = new Digimon();
+        };
     </script>
 </body>
 </html>
