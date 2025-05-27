@@ -105,6 +105,36 @@
             max-width: 400px;
         }
 
+        .evolution-button {
+            grid-column: 1 / -1;
+            width: 120px;
+            height: 60px;
+            justify-self: center;
+            margin-top: 20px;
+            background: linear-gradient(135deg, #ff6b6b, #ff8e53);
+            font-size: 16px;
+            letter-spacing: 1px;
+            animation: pulse 2s infinite;
+        }
+
+        .evolution-button:hover {
+            background: linear-gradient(135deg, #ff8080, #ffa366);
+            transform: translateY(-3px) scale(1.05);
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 
+                    0 8px 16px rgba(255, 107, 107, 0.4),
+                    inset 0 2px 4px rgba(255, 255, 255, 0.3);
+            }
+            50% {
+                box-shadow: 
+                    0 12px 24px rgba(255, 107, 107, 0.6),
+                    inset 0 2px 4px rgba(255, 255, 255, 0.4);
+            }
+        }
+
         .button {
             width: 80px;
             height: 80px;
@@ -264,7 +294,7 @@
         @media (max-width: 400px) {
             .digimon-device {
                 padding: 15px;
-                border: 6px solid #7f8c8d;
+                border: 6px solid #ffffff;
             }
             
             .button {
@@ -317,6 +347,7 @@
             <div class="button" onclick="cleanDigimon()">ウンチ</div>
             <div class="button" onclick="healDigimon()">クスリ</div>
             <div class="button" onclick="statusDigimon()">ステータス</div>
+            <div class="button evolution-button" onclick="evolveDigimon()">しんか</div>
         </div>
 
         <div class="time-display" id="timeDisplay">12:00</div>
@@ -383,6 +414,38 @@
                 }
             }
 
+            evolve() {
+                if (this.strength >= 80 && this.happiness >= 70 && this.age >= 1) {
+                    const evolutions = [
+                        { name: 'メタルグレイモン', sprite: '🦾🐲' },
+                        { name: 'ワーグレイモン', sprite: '🐲' },
+                        { name: 'オメガモン', sprite: '⚔️🐲' },
+                        { name: 'アグモン', sprite: '🦖' }
+                    ];
+                    
+                    const currentIndex = evolutions.findIndex(evo => evo.name === this.name);
+                    const nextIndex = (currentIndex + 1) % evolutions.length;
+                    const evolution = evolutions[nextIndex];
+                    
+                    this.name = evolution.name;
+                    this.sprite = evolution.sprite;
+                    this.strength = Math.min(100, this.strength + 10);
+                    this.happiness = Math.min(100, this.happiness + 15);
+                    
+                    document.getElementById('digimonName').textContent = this.name;
+                    document.getElementById('menuText').textContent = this.name.toUpperCase();
+                    
+                    this.showMessage(`${this.name}に進化した！`);
+                    this.updateDisplay();
+                } else {
+                    let message = '進化できません！';
+                    if (this.strength < 80) message += ' つよさが足りません。';
+                    if (this.happiness < 70) message += ' ハートが足りません。';
+                    if (this.age < 1) message += ' まだ若すぎます。';
+                    this.showMessage(message);
+                }
+            }
+
             showStatus() {
                 const statusText = `
 名前: ${this.name}
@@ -401,8 +464,8 @@
                 nameElement.style.textShadow = '0 0 10px #ffffff';
                 nameElement.textContent = message;
                 setTimeout(() => {
-                    nameElement.style.color = '#9fff9f';
-                    nameElement.style.textShadow = '0 0 8px #9fff9f';
+                    nameElement.style.color = '#ffffff';
+                    nameElement.style.textShadow = '0 0 10px rgba(255, 255, 255, 0.8)';
                     nameElement.textContent = originalText;
                 }, 2500);
             }
@@ -526,6 +589,14 @@
             addButtonFeedback(button);
             if (digimon) {
                 digimon.showStatus();
+            }
+        }
+
+        function evolveDigimon() {
+            const button = event.target;
+            addButtonFeedback(button);
+            if (digimon) {
+                digimon.evolve();
             }
         }
 
