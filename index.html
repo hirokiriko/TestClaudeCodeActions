@@ -57,7 +57,12 @@
             text-align: center;
             font-size: 16px;
             font-weight: bold;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+            text-shadow: 
+                2px 2px 0px #000000,
+                -2px -2px 0px #000000,
+                2px -2px 0px #000000,
+                -2px 2px 0px #000000,
+                0 0 10px rgba(255, 255, 255, 0.8);
         }
 
         .digimon-display {
@@ -68,14 +73,22 @@
         }
 
         .digimon-name {
-            font-size: 18px;
+            font-size: 20px;
             margin-bottom: 8px;
             letter-spacing: 1px;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 4px 8px;
+            border-radius: 6px;
+            display: inline-block;
         }
 
         .stats {
-            font-size: 13px;
+            font-size: 14px;
             line-height: 1.4;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 8px;
+            border-radius: 8px;
+            margin-top: 8px;
         }
 
         .stats-bar {
@@ -106,15 +119,28 @@
         }
 
         .evolution-button {
-            grid-column: 1 / -1;
-            width: 120px;
-            height: 60px;
-            justify-self: center;
-            margin-top: 20px;
+            width: 90px;
+            height: 90px;
             background: linear-gradient(135deg, #ff6b6b, #ff8e53);
-            font-size: 16px;
+            font-size: 14px;
             letter-spacing: 1px;
             animation: pulse 2s infinite;
+            border-radius: 20px;
+            border: 4px solid #ffffff;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #ffffff;
+            transition: all 0.3s ease;
+            box-shadow: 
+                0 8px 16px rgba(255, 107, 107, 0.4),
+                inset 0 2px 4px rgba(255, 255, 255, 0.3);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+            user-select: none;
+            position: relative;
+            overflow: hidden;
         }
 
         .evolution-button:hover {
@@ -136,8 +162,8 @@
         }
 
         .button {
-            width: 80px;
-            height: 80px;
+            width: 90px;
+            height: 90px;
             border-radius: 20px;
             border: 4px solid #ffffff;
             background: linear-gradient(135deg, #667eea, #764ba2);
@@ -347,6 +373,8 @@
             <div class="button" onclick="cleanDigimon()">ウンチ</div>
             <div class="button" onclick="healDigimon()">クスリ</div>
             <div class="button" onclick="statusDigimon()">ステータス</div>
+            <div class="button" onclick="feedDigimon()">🍎エサ2</div>
+            <div class="button" onclick="playWithDigimon()">🎮ゲーム</div>
             <div class="button evolution-button" onclick="evolveDigimon()">しんか</div>
         </div>
 
@@ -415,7 +443,7 @@
             }
 
             evolve() {
-                if (this.strength >= 80 && this.happiness >= 70 && this.age >= 1) {
+                if (this.strength >= 40 && this.happiness >= 50) {
                     const evolutions = [
                         { name: 'メタルグレイモン', sprite: '🦾🐲' },
                         { name: 'ワーグレイモン', sprite: '🐲' },
@@ -439,9 +467,8 @@
                     this.updateDisplay();
                 } else {
                     let message = '進化できません！';
-                    if (this.strength < 80) message += ' つよさが足りません。';
-                    if (this.happiness < 70) message += ' ハートが足りません。';
-                    if (this.age < 1) message += ' まだ若すぎます。';
+                    if (this.strength < 40) message += ' つよさが足りません(40以上必要)。';
+                    if (this.happiness < 50) message += ' ハートが足りません(50以上必要)。';
                     this.showMessage(message);
                 }
             }
